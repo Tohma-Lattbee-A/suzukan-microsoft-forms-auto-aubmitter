@@ -1,9 +1,10 @@
 from selenium import webdriver
-from selenium.webdriver.edge.service import Service
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 import argparse
 import time
 
@@ -28,15 +29,14 @@ form_url = "https://forms.office.com/Pages/ResponsePage.aspx?id=s-vy4xAIWUmOBWzs
 def submit_form(name, task_description, attendance_option, note=""):
     print(f"\n--- {name} さんの送信を開始します ---")
 
-    # --- Edgeドライバ起動（headless可能） ---
-    options = webdriver.EdgeOptions()
-    options.add_argument("--headless")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
+    # --- Headless Chrome の起動設定（Render対応）---
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
 
-    driver = webdriver.Edge(
-        service=Service(EdgeChromiumDriverManager().install()),
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()),
         options=options
     )
 
