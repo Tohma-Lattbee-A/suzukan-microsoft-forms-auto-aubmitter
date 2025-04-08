@@ -1,3 +1,8 @@
+buildCommand: |
+  apt-get update && apt-get install -y chromium && \
+  pip install -r requirements.txt
+startCommand: ""
+
 services:
   - type: cron
     name: start-shift
