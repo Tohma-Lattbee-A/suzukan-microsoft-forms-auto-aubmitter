@@ -1,14 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-mkdir -p .render/chrome
-cd .render/chrome
+# Install Chromium manually
+mkdir -p .local/chrome
+cd .local/chrome
 
-# Google Chrome をダウンロード
-curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+curl -SL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o chrome.deb
+apt-get update && apt-get install -y ./chrome.deb
 
-# 解凍
-dpkg -x google-chrome-stable_current_amd64.deb .
-
-# パスを確認
-echo "Chrome binary located at:"
-echo "$(pwd)/opt/google/chrome/chrome"
+# Install chromedriver
+cd /opt/render/project/src
+pip install -r requirements.txt

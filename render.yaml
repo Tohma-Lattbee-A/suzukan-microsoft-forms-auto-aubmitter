@@ -1,8 +1,4 @@
-buildCommand: |
-  apt-get update && apt-get install -y curl unzip wget gnupg ca-certificates fonts-liberation xdg-utils && \
-  pip install -r requirements.txt && \
-  bash render-build.sh
-
+buildCommand: ./render-build.sh
 startCommand: ""
 
 services:
