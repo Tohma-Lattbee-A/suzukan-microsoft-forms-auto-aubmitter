@@ -1,15 +1,20 @@
 buildCommand: |
-  apt-get update && apt-get install -y chromium && \
+  apt-get update && \
+  apt-get install -y wget gnupg2 && \
+  echo "deb [arch=amd64] http://security.ubuntu.com/ubuntu focal-security main" >> /etc/apt/sources.list && \
+  apt-get update && \
+  apt-get install -y chromium-browser && \
   pip install -r requirements.txt
+
 startCommand: ""
 
 services:
   - type: cron
     name: start-shift
-    schedule: "0 0 1-7 * *"  # JST 9:00 → UTC 0:00
+    schedule: "0 0 1-7 * *"
     command: "python app.py --mode start"
 
   - type: cron
     name: end-shift
-    schedule: "0 5 1-7 * *"  # JST 14:00 → UTC 5:00
+    schedule: "0 5 1-7 * *"
     command: "python app.py --mode end"
