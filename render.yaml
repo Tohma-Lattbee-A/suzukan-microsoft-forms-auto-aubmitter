@@ -1,9 +1,6 @@
 buildCommand: |
   apt-get update && \
-  apt-get install -y wget gnupg2 && \
-  echo "deb [arch=amd64] http://security.ubuntu.com/ubuntu focal-security main" >> /etc/apt/sources.list && \
-  apt-get update && \
-  apt-get install -y chromium-browser && \
+  apt-get install -y chromium chromium-driver && \
   pip install -r requirements.txt
 
 startCommand: ""
