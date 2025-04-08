@@ -1,0 +1,10 @@
+services:
+  - type: cron
+    name: start-shift
+    schedule: "0 0 1-7 * *"  # JST 9:00 → UTC 0:00
+    command: "python app.py --mode start"
+
+  - type: cron
+    name: end-shift
+    schedule: "0 5 1-7 * *"  # JST 14:00 → UTC 5:00
+    command: "python app.py --mode end"
